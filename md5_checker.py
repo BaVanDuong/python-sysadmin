@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import hashlib
 import sys
 import optparse
@@ -40,12 +42,14 @@ def main():
 
     (options, args) = get_argv()
     fname = os.path.abspath(options.fin)
+    hash_type = options.hash_type
+    checksum = options.checksum
+
     if not os.path.exists(fname):
         print "File %s don't exists!" % fname
         sys.exit(0)
-
-    hash_type = options.hash_type
-    checksum = options.checksum
+    if hasattr(hashlib, hash_type):
+        print 'Support hash type: md5, sha1, sha224, sha256, sha512, sha384'
     hash_file = HashFile(fname, hash_type)
 
     print 'Checking for %s ...' % (fname)
