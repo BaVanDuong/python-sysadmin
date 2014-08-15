@@ -17,7 +17,7 @@ class HashFile(threading.Thread):
         self.result =  self.hash_file().hexdigest()
 
     def hash_file(self):
-        BLOCKSIZE = int(10E6)
+        BLOCKSIZE = 65536
         hasher = getattr(hashlib, self.hash_type)()
         with open(self.fname, 'rb') as fin:
             buf = fin.read(BLOCKSIZE)
