@@ -41,6 +41,7 @@ def main():
     (options, args) = get_argv()
     fname = os.path.abspath(options.fin)
     if not os.path.exists(fname):
+        print "File %s don't exists!" % fname
         sys.exit(0)
 
     hash_type = options.hash_type
