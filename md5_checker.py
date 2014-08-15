@@ -38,6 +38,7 @@ def get_argv():
 
 
 def main():
+    HASH = ('md5', 'sha1', 'sha224', 'sha256', 'sha512', 'sha384')
     start = time.time()
 
     (options, args) = get_argv()
@@ -48,8 +49,10 @@ def main():
     if not os.path.exists(fname):
         print "File %s don't exists!" % fname
         sys.exit(0)
-    if hasattr(hashlib, hash_type):
+    if hash_type not in HASH:
         print 'Support hash type: md5, sha1, sha224, sha256, sha512, sha384'
+        sys.exit(0)
+
     hash_file = HashFile(fname, hash_type)
 
     print 'Checking for %s ...' % (fname)
