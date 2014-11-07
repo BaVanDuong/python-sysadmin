@@ -17,7 +17,7 @@ try:
 		str(consts.VMS_SUSPENDED):"suspened"}
 
 except ImportError:
-	print "[-]Error: Not fount module prlsdkapi"
+	print "[-]Error: Not found module prlsdkapi"
 	
 def search_vm(server, name, status, memsize, cpucount):
 	vm_list = server.get_vm_list().wait()
