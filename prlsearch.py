@@ -22,6 +22,7 @@ except ImportError:
 def search_vm(server, name, status, memsize, cpucount):
 	vm_list = server.get_vm_list().wait()
 	result = []
+	
 	for i in range(vm_list.get_params_count()):
 		try:
 			vm = vm_list.get_param_by_index(i)
