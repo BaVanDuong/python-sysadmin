@@ -88,8 +88,8 @@ Example:
 	cpucount = options.cpucount
 	cmd = options.cmd
 	# validation argv
-	match_host = re.match(r'localhost|\w*:\w*:\d*\Z', host)
-	if not match_host:
+	match_host = fnmatch.fnmatch(host, "*:*:*")
+	if not match_host and host != "localhost":
 		print usage
 		sys.exit(0)
 	match_memsize = re.match(r'(>|==|<|<=|>=)(\d+\Z)', memsize)
