@@ -8,13 +8,13 @@ import fnmatch
 
 
 try:
-		import prlsdkapi.prlsdk
-		prlsdk = prlsdkapi.prlsdk
-		consts = prlsdkapi.prlsdk.consts
-		state = {str(consts.VMS_STOPPED):"stopped",
-			str(consts.VMS_RUNNING): "running",
-			str(consts.VMS_PAUSED):"paused",
-			str(consts.VMS_SUSPENDED):"suspened"}
+	import prlsdkapi.prlsdk
+	prlsdk = prlsdkapi.prlsdk
+	consts = prlsdkapi.prlsdk.consts
+	state = {str(consts.VMS_STOPPED):"stopped",
+		str(consts.VMS_RUNNING): "running",
+		str(consts.VMS_PAUSED):"paused",
+		str(consts.VMS_SUSPENDED):"suspened"}
 
 except ImportError:
 	print "[-]Error: Not fount module prlsdkapi"
@@ -24,20 +24,20 @@ def search_vm(server, name, status, memsize, cpucount):
 	result = []
 	for i in range(vm_list.get_params_count()):
 		try:
-				vm = vm_list.get_param_by_index(i)
-				vm_config = vm.get_config()
-				vm_uuid = vm.get_uuid()
-				vm_name = vm.get_name()
-				vm_stat = vm.get_state().wait()
-				vm_stat_code = vm_stat.get_param().get_state()
-				vm_state_str= state[str(vm_stat_code)] if str(vm_stat_code) in state.keys() else "unknown"
-				vm_memsize = vm_config.get_ram_size()
-				vm_cpucount = vm_config.get_cpu_count()
-				if (fnmatch.fnmatch(vm_name, name) or name == '')and\
-					(vm_state_str == status or status == '')and\
-					(eval(str(vm_memsize) + memsize) or memsize is '')and\
-					(eval(str(vm_cpucount) + cpucount) or cpucount is ''):
-					result.append((vm_uuid, vm_name, vm_state_str, vm_memsize, vm_cpucount))
+			vm = vm_list.get_param_by_index(i)
+			vm_config = vm.get_config()
+			vm_uuid = vm.get_uuid()
+			vm_name = vm.get_name()
+			vm_stat = vm.get_state().wait()
+			vm_stat_code = vm_stat.get_param().get_state()
+			vm_state_str= state[str(vm_stat_code)] if str(vm_stat_code) in state.keys() else "unknown"
+			vm_memsize = vm_config.get_ram_size()
+			vm_cpucount = vm_config.get_cpu_count()
+			if (fnmatch.fnmatch(vm_name, name) or name == '')and\
+				(vm_state_str == status or status == '')and\
+				(eval(str(vm_memsize) + memsize) or memsize is '')and\
+				(eval(str(vm_cpucount) + cpucount) or cpucount is ''):
+				result.append((vm_uuid, vm_name, vm_state_str, vm_memsize, vm_cpucount))
 		except Exception, e:
 			print "[-] Error : %s" % e
 	return result	
@@ -116,14 +116,14 @@ Example:
 	if result:
 		for item in result:
 			try:
-					if cmd is '':
-						print "%10s | %15s | %5s | %4d | %d" % (item[0], item[1], item[2], item[3], item[4])
-					else:
-						cmd_exec = cmd % item[0]
-						print COGREEN+cmd_exec+ENDC
-						print '----------------------------------------------------------'
-						os.system(cmd_exec)
-						print '----------------------------------------------------------'
+				if cmd is '':
+					print "%10s | %15s | %5s | %4d | %d" % (item[0], item[1], item[2], item[3], item[4])
+				else:
+					cmd_exec = cmd % item[0]
+					print COGREEN+cmd_exec+ENDC
+					print '----------------------------------------------------------'
+					os.system(cmd_exec)
+					print '----------------------------------------------------------'
 			except Exception, e:
 				print "[-]Error: %s" % e
 		
