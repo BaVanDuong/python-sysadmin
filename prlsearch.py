@@ -112,7 +112,7 @@ Example:
 		login = server.login_local('', 0, consts.PSL_NORMAL_SECURITY)
 	else:
 		host,user,passwd = host.split(':')
-		login = server.login(host, user, passwd, '', 0, 0, consts.PSL_NORMAL_SECURITY)
+		login = server.login(host, user, passwd, '', 0, 0, consts.PSL_NORMAL_SECURITY).wait()
 	result = search_vm(server, name, status , memsize, cpucount)
 	if result:
 		for item in result:
