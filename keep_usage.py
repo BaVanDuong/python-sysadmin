@@ -46,7 +46,7 @@ def delete_files_by_date(days, path):
 def main():
 	if (len(sys.argv)) != 4:
 		print """
-		Use script with option <percent|day> <value> 
+		Use script with option <path> <percent|day> <value> 
 		"""
 		sys.exit(0)
 	path = sys.argv[1]
