@@ -44,23 +44,23 @@ def delete_files_by_date(days, path):
 	return 0
 	
 def main():
-	if (len(sys.argv)) != 3:
+	if (len(sys.argv)) != 4:
 		print """
 		Use script with option <percent|day> <value> 
 		"""
 		sys.exit(0)
-		
-	if(sys.argv[1] == 'percent'):
+	path = sys.argv[1]
+	condition = sys.argv[2]
+	value = sys.argv[3]
+	if(condition == 'percent'):
 		size = 6442450944
 		usage = 5712144257
-		percent_max = sys.argv[2]
-		delete_files_by_percent(size, usage, percent_max, path)
-	elif(sys.argv[1] == 'day'):
-		days = sys.argv[2]
-		delete_files_by_date(90, '/tmp')
+		delete_files_by_percent(size, usage, value, path)
+	elif(condition == 'day'):
+		delete_files_by_date(value, path)
 	else:
 		print """
-		Use script with option <percent|day> <value> 
+		Use script with option <path> <percent|day> <value> 
 		"""
 	
 if __name__ == '__main__':
