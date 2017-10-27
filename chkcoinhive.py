@@ -4,6 +4,7 @@
 # Example: chkcoinhive urls.txt
 # please using python 3 installed module bs4, lxml
 
+
 import requests
 import sys
 from bs4 import BeautifulSoup
