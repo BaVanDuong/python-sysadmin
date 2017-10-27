@@ -1,4 +1,8 @@
 #!/usr/bin/python
+# Check website have script coin-hive
+# Add urls list in one file then run script
+# Example: chkcoinhive urls.txt
+# please using python 3 installed module bs4, lxml
 
 import requests
 import sys
